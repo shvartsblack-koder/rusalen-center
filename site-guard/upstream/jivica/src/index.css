@@ -1,0 +1,103 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Manrope:wght@400;500;600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* ЖИВИЦА — Deep Forest Luxury Design System */
+    --background: 125 18% 96%;
+    --foreground: 135 40% 8%;
+    --card: 0 0% 100%;
+    --card-foreground: 135 40% 8%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 135 40% 8%;
+    --primary: 140 60% 22%;
+    --primary-foreground: 0 0% 98%;
+    --secondary: 125 18% 91%;
+    --secondary-foreground: 135 35% 16%;
+    --muted: 125 14% 90%;
+    --muted-foreground: 125 14% 44%;
+    --accent: 155 55% 30%;
+    --accent-foreground: 0 0% 98%;
+    --destructive: 4 82% 50%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 125 18% 82%;
+    --input: 125 18% 86%;
+    --ring: 140 60% 28%;
+    --radius: 0.75rem;
+    --chart-1: 140 60% 28%;
+    --chart-2: 155 55% 34%;
+    --chart-3: 38 75% 48%;
+    --chart-4: 90 42% 38%;
+    --chart-5: 4 82% 50%;
+    --font-heading: 'Manrope', ui-sans-serif, system-ui, sans-serif;
+    --font-body: 'Inter', ui-sans-serif, system-ui, sans-serif;
+    --font-display: 'Manrope', ui-sans-serif, system-ui, sans-serif;
+    --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    --sidebar-background: 138 55% 7%;
+    --sidebar-foreground: 125 20% 78%;
+    --sidebar-primary: 140 50% 48%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 138 40% 13%;
+    --sidebar-accent-foreground: 125 15% 88%;
+    --sidebar-border: 138 35% 13%;
+    --sidebar-ring: 140 50% 40%;
+    /* Custom tokens */
+    --forest: 140 60% 13%;
+    --sage: 155 38% 38%;
+    --moss: 105 32% 28%;
+    --crisis-green: 148 62% 33%;
+    --crisis-yellow: 45 92% 50%;
+    --crisis-orange: 25 88% 48%;
+    --crisis-red: 4 82% 44%;
+  }
+
+  .dark {
+    --background: 130 30% 8%;
+    --foreground: 120 15% 92%;
+    --card: 130 25% 12%;
+    --card-foreground: 120 15% 92%;
+    --popover: 130 25% 12%;
+    --popover-foreground: 120 15% 92%;
+    --primary: 133 55% 52%;
+    --primary-foreground: 130 40% 8%;
+    --secondary: 130 20% 18%;
+    --secondary-foreground: 120 15% 85%;
+    --muted: 130 20% 16%;
+    --muted-foreground: 120 12% 53%;
+    --accent: 148 50% 45%;
+    --accent-foreground: 0 0% 98%;
+    --destructive: 4 80% 50%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 130 20% 20%;
+    --input: 130 20% 18%;
+    --ring: 133 55% 50%;
+    --chart-1: 133 55% 52%;
+    --chart-2: 148 50% 48%;
+    --chart-3: 38 80% 60%;
+    --chart-4: 90 45% 50%;
+    --chart-5: 4 80% 55%;
+    --sidebar-background: 130 35% 7%;
+    --sidebar-foreground: 120 15% 82%;
+    --sidebar-primary: 133 55% 52%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 130 25% 14%;
+    --sidebar-accent-foreground: 120 15% 88%;
+    --sidebar-border: 130 25% 16%;
+    --sidebar-ring: 133 55% 50%;
+  }
+}
+
+
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+
+  body {
+    @apply bg-background text-foreground font-body;
+  }
+}

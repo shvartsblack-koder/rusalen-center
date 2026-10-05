@@ -1,0 +1,79 @@
+{
+  "name": "MediaLibraryItem",
+  "type": "object",
+  "properties": {
+    "title": {
+      "type": "string",
+      "description": "\u041d\u0430\u0437\u0432\u0430\u043d\u0438\u0435 \u043c\u0430\u0442\u0435\u0440\u0438\u0430\u043b\u0430"
+    },
+    "authors": {
+      "type": "string",
+      "description": "\u0410\u0432\u0442\u043e\u0440\u044b"
+    },
+    "description": {
+      "type": "string",
+      "description": "\u0410\u043d\u043d\u043e\u0442\u0430\u0446\u0438\u044f / \u043e\u043f\u0438\u0441\u0430\u043d\u0438\u0435"
+    },
+    "type": {
+      "type": "string",
+      "enum": [
+        "article",
+        "video",
+        "audio",
+        "book",
+        "presentation",
+        "dataset"
+      ],
+      "description": "\u0422\u0438\u043f \u043c\u0430\u0442\u0435\u0440\u0438\u0430\u043b\u0430"
+    },
+    "topics": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "\u0422\u0435\u043c\u044b \u0438\u0441\u0441\u043b\u0435\u0434\u043e\u0432\u0430\u043d\u0438\u0439"
+    },
+    "language": {
+      "type": "string",
+      "enum": [
+        "ru",
+        "en",
+        "other"
+      ],
+      "default": "ru",
+      "description": "\u042f\u0437\u044b\u043a"
+    },
+    "year": {
+      "type": "number",
+      "description": "\u0413\u043e\u0434 \u043f\u0443\u0431\u043b\u0438\u043a\u0430\u0446\u0438\u0438"
+    },
+    "journal": {
+      "type": "string",
+      "description": "\u0416\u0443\u0440\u043d\u0430\u043b / \u0438\u0441\u0442\u043e\u0447\u043d\u0438\u043a"
+    },
+    "doi": {
+      "type": "string",
+      "description": "DOI \u0438\u043b\u0438 \u0441\u0441\u044b\u043b\u043a\u0430"
+    },
+    "file_url": {
+      "type": "string",
+      "description": "\u0424\u0430\u0439\u043b \u0438\u043b\u0438 \u0432\u043d\u0435\u0448\u043d\u044f\u044f \u0441\u0441\u044b\u043b\u043a\u0430"
+    },
+    "cover_url": {
+      "type": "string",
+      "description": "\u041e\u0431\u043b\u043e\u0436\u043a\u0430"
+    },
+    "duration": {
+      "type": "string",
+      "description": "\u0414\u043b\u0438\u0442\u0435\u043b\u044c\u043d\u043e\u0441\u0442\u044c (\u0434\u043b\u044f \u0432\u0438\u0434\u0435\u043e/\u0430\u0443\u0434\u0438\u043e)"
+    },
+    "is_published": {
+      "type": "boolean",
+      "default": true
+    }
+  },
+  "required": [
+    "title",
+    "type"
+  ]
+}

@@ -1,0 +1,9 @@
+User-agent: *
+Allow: /
+Disallow: /profile
+Disallow: /login
+Disallow: /register
+Disallow: /forgot-password
+Disallow: /reset-password
+
+Sitemap: https://xn--80akrjlgn.xn--p1ai/sitemap.xml

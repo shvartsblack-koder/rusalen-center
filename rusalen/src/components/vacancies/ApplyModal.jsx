@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -17,6 +18,7 @@ export default function ApplyModal({ vacancy, open, onClose }) {
   const [errors, setErrors] = useState({});
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
+  const [consent, setConsent] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -28,6 +30,7 @@ export default function ApplyModal({ vacancy, open, onClose }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (!consent) return;
 
     const { valid, errors: validationErrors } = validateLeadFields({
       ...form,
@@ -50,6 +53,7 @@ export default function ApplyModal({ vacancy, open, onClose }) {
         email: form.email,
         phone: form.phone,
         source,
+        consent: true,
       });
       setSuccess(true);
     } catch (err) {
@@ -63,6 +67,7 @@ export default function ApplyModal({ vacancy, open, onClose }) {
     setSuccess(false);
     setForm({ name: '', email: '', phone: '', message: '' });
     setErrors({});
+    setConsent(false);
     onClose();
   };
 
@@ -136,9 +141,28 @@ export default function ApplyModal({ vacancy, open, onClose }) {
                 className="bg-secondary border-border resize-none"
               />
             </div>
+            <label className="flex items-start gap-2 text-xs leading-snug cursor-pointer text-muted-foreground">
+              <input
+                type="checkbox"
+                checked={consent}
+                onChange={(e) => setConsent(e.target.checked)}
+                className="mt-0.5 shrink-0"
+              />
+              <span>
+                Я даю согласие на обработку персональных данных в соответствии с{' '}
+                <Link to="/privacy" className="text-primary underline" onClick={(e) => e.stopPropagation()}>
+                  политикой конфиденциальности
+                </Link>
+              </span>
+            </label>
+            {!consent && (
+              <p className="text-destructive text-xs">
+                Необходимо согласие на обработку персональных данных
+              </p>
+            )}
             <Button
               type="submit"
-              disabled={loading}
+              disabled={loading || !consent}
               className="w-full bg-primary text-primary-foreground hover:bg-primary/80"
             >
               {loading ? <Loader2 className="w-4 h-4 animate-spin" /> : 'Отправить отклик'}

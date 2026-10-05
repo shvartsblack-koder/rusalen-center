@@ -1,0 +1,62 @@
+{
+  "name": "Appointment",
+  "type": "object",
+  "properties": {
+    "user_id": {
+      "type": "string"
+    },
+    "user_name": {
+      "type": "string"
+    },
+    "specialist_id": {
+      "type": "string"
+    },
+    "specialist_name": {
+      "type": "string"
+    },
+    "date": {
+      "type": "string",
+      "format": "date"
+    },
+    "time": {
+      "type": "string"
+    },
+    "duration_minutes": {
+      "type": "number",
+      "default": 60
+    },
+    "type": {
+      "type": "string",
+      "enum": [
+        "chat",
+        "audio",
+        "video",
+        "in_person"
+      ],
+      "default": "video"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "scheduled",
+        "in_progress",
+        "completed",
+        "cancelled"
+      ],
+      "default": "scheduled"
+    },
+    "notes": {
+      "type": "string"
+    },
+    "rating": {
+      "type": "number"
+    },
+    "feedback": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "user_id",
+    "specialist_id"
+  ]
+}

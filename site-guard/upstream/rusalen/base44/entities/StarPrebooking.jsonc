@@ -1,0 +1,49 @@
+{
+  "name": "StarPrebooking",
+  "type": "object",
+  "properties": {
+    "star_name": {
+      "type": "string",
+      "description": "\u041a\u043e\u0433\u043e \u043f\u0440\u0438\u0432\u0435\u0437\u0442\u0438"
+    },
+    "format": {
+      "type": "string",
+      "description": "\u0424\u043e\u0440\u043c\u0430\u0442 \u043c\u0435\u0440\u043e\u043f\u0440\u0438\u044f\u0442\u0438\u044f"
+    },
+    "city": {
+      "type": "string",
+      "description": "\u0413\u043e\u0440\u043e\u0434"
+    },
+    "comment": {
+      "type": "string",
+      "description": "\u041a\u043e\u043c\u043c\u0435\u043d\u0442\u0430\u0440\u0438\u0439"
+    },
+    "name": {
+      "type": "string",
+      "description": "\u0418\u043c\u044f"
+    },
+    "email": {
+      "type": "string",
+      "description": "Email"
+    },
+    "phone": {
+      "type": "string",
+      "description": "\u0422\u0435\u043b\u0435\u0444\u043e\u043d"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "new",
+        "in_review",
+        "confirmed",
+        "rejected"
+      ],
+      "default": "new",
+      "description": "\u0421\u0442\u0430\u0442\u0443\u0441 \u0437\u0430\u044f\u0432\u043a\u0438"
+    }
+  },
+  "required": [
+    "star_name",
+    "email"
+  ]
+}

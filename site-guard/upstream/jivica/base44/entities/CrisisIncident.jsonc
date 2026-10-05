@@ -1,0 +1,87 @@
+{
+  "name": "CrisisIncident",
+  "type": "object",
+  "properties": {
+    "user_id": {
+      "type": "string"
+    },
+    "user_name": {
+      "type": "string"
+    },
+    "type": {
+      "type": "string",
+      "enum": [
+        "panic",
+        "crisis_call",
+        "ai_escalation",
+        "self_report",
+        "specialist_alert"
+      ],
+      "default": "panic"
+    },
+    "severity": {
+      "type": "string",
+      "enum": [
+        "low",
+        "medium",
+        "high",
+        "critical"
+      ],
+      "default": "high"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "active",
+        "assigned",
+        "in_progress",
+        "resolved",
+        "closed"
+      ],
+      "default": "active"
+    },
+    "description": {
+      "type": "string"
+    },
+    "latitude": {
+      "type": "number"
+    },
+    "longitude": {
+      "type": "number"
+    },
+    "address": {
+      "type": "string"
+    },
+    "assigned_specialist_id": {
+      "type": "string"
+    },
+    "assigned_specialist_name": {
+      "type": "string"
+    },
+    "response_time_minutes": {
+      "type": "number"
+    },
+    "resolution_notes": {
+      "type": "string"
+    },
+    "notified_contacts": {
+      "type": "boolean",
+      "default": false
+    },
+    "escalation_level": {
+      "type": "string",
+      "enum": [
+        "ai",
+        "consultant",
+        "psychologist",
+        "psychiatrist",
+        "emergency"
+      ],
+      "default": "ai"
+    }
+  },
+  "required": [
+    "user_id",
+    "type"
+  ]
+}
