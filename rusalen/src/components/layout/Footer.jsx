@@ -26,7 +26,6 @@ const footerNav = [
     { label: 'PsyPay', path: '/psypay' },
     { label: 'PsyTech', path: '/psytech' },
     { label: 'Psyty', path: '/psyty' },
-    { label: 'Psyvent', path: '/psyvent' },
     { label: 'Контакты', path: '/contacts' },
   ]},
 ];
@@ -35,11 +34,13 @@ export default function Footer() {
   const [email, setEmail] = useState('');
   const [emailError, setEmailError] = useState('');
   const [subscribed, setSubscribed] = useState(false);
+  const [consent, setConsent] = useState(false);
   const [loading, setLoading] = useState(false);
   const [submitError, setSubmitError] = useState('');
 
   const handleSubscribe = async (e) => {
     e.preventDefault();
+    if (!consent) return;
     if (!isValidEmail(email)) {
       setEmailError(VALIDATION_MESSAGES.email);
       return;
@@ -54,9 +55,11 @@ export default function Footer() {
         email,
         phone: '',
         source: `${window.location.pathname} | подписка на рассылку`,
+        consent: true,
       });
       setSubscribed(true);
       setEmail('');
+      setConsent(false);
     } catch (err) {
       console.error('Newsletter subscription error:', err);
       setSubmitError('Не удалось подписаться. Попробуйте позже.');
@@ -118,6 +121,7 @@ export default function Footer() {
               {subscribed ? (
                 <p className="text-sm text-accent">Вы успешно подписались!</p>
               ) : (
+                <>
                 <div className="flex gap-2">
                   <Input
                     type="email"
@@ -131,12 +135,32 @@ export default function Footer() {
                   />
                   <Button
                     type="submit"
-                    disabled={loading}
+                    disabled={loading || !consent}
                     className="bg-primary text-primary-foreground hover:bg-primary/80 shrink-0"
                   >
                     <Send className="w-4 h-4" />
                   </Button>
                 </div>
+                <label className="flex items-start gap-2 text-xs leading-snug cursor-pointer text-muted-foreground">
+                  <input
+                    type="checkbox"
+                    checked={consent}
+                    onChange={(e) => setConsent(e.target.checked)}
+                    className="mt-0.5 shrink-0"
+                  />
+                  <span>
+                    Я даю согласие на обработку персональных данных в соответствии с{' '}
+                    <Link to="/privacy" className="text-primary underline" onClick={(e) => e.stopPropagation()}>
+                      политикой конфиденциальности
+                    </Link>
+                  </span>
+                </label>
+                {!consent && (
+                  <p className="text-destructive text-xs">
+                    Необходимо согласие на обработку персональных данных
+                  </p>
+                )}
+                </>
               )}
               {emailError && <p className="text-destructive text-xs">{emailError}</p>}
               {submitError && <p className="text-destructive text-xs">{submitError}</p>}
@@ -148,6 +172,10 @@ export default function Footer() {
           <p className="text-[11px] font-mono text-muted-foreground/60 leading-relaxed">
             © {new Date().getFullYear()} РУСАЛЕН. Все права защищены. Данный сайт не оказывает экстренную психологическую помощь.
             Информация, размещённая на сайте, носит информационный характер и не заменяет консультацию квалифицированного специалиста.
+          </p>
+          <p className="text-[11px] font-mono text-muted-foreground/60 leading-relaxed">
+            АНО «Международный исследовательский центр РУСАЛЕН» · ИНН 7736341108 · ОГРН 1227700255408 ·
+            Лицензия на образовательную деятельность № Л035-01298-77/01005950 от 22.12.2023
           </p>
           <p className="text-[11px] font-mono text-muted-foreground/60 leading-relaxed">
             <Link to="/privacy" className="underline hover:text-foreground">Политика конфиденциальности</Link>

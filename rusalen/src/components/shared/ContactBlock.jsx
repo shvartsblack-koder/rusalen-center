@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Button } from '@/components/ui/button';
@@ -20,6 +21,7 @@ export default function ContactBlock() {
   const [form, setForm] = useState({ name: '', email: '', phone: '', subject: '', message: '' });
   const [errors, setErrors] = useState({});
   const [status, setStatus] = useState('idle');
+  const [consent, setConsent] = useState(false);
 
   const updateField = (field, value) => {
     setForm((prev) => ({ ...prev, [field]: value }));
@@ -30,6 +32,7 @@ export default function ContactBlock() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (!consent) return;
 
     const leadErrors = validateLeadFields({
       name: form.name,
@@ -60,10 +63,12 @@ export default function ContactBlock() {
         email: form.email,
         phone: form.phone,
         source,
+        consent: true,
       });
       setStatus('success');
       setForm({ name: '', email: '', phone: '', subject: '', message: '' });
       setErrors({});
+      setConsent(false);
       setTimeout(() => setStatus('idle'), 4000);
     } catch (err) {
       console.error('Contact form error:', err);
@@ -142,10 +147,29 @@ export default function ContactBlock() {
               />
               <FieldError message={errors.message} />
             </div>
+            <label className="flex items-start gap-2 text-xs leading-snug cursor-pointer text-muted-foreground">
+              <input
+                type="checkbox"
+                checked={consent}
+                onChange={(e) => setConsent(e.target.checked)}
+                className="mt-0.5 shrink-0"
+              />
+              <span>
+                Я даю согласие на обработку персональных данных в соответствии с{' '}
+                <Link to="/privacy" className="text-primary underline" onClick={(e) => e.stopPropagation()}>
+                  политикой конфиденциальности
+                </Link>
+              </span>
+            </label>
+            {!consent && (
+              <p className="text-destructive text-xs">
+                Необходимо согласие на обработку персональных данных
+              </p>
+            )}
             <div className="flex justify-end">
               <Button
                 type="submit"
-                disabled={status === 'sending'}
+                disabled={status === 'sending' || !consent}
                 className="bg-primary text-primary-foreground hover:bg-primary/80 gap-2"
               >
                 {status === 'sending' ? (

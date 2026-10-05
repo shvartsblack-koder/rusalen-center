@@ -1,0 +1,65 @@
+{
+  "name": "JobListing",
+  "type": "object",
+  "properties": {
+    "title": {
+      "type": "string"
+    },
+    "company": {
+      "type": "string"
+    },
+    "company_logo_url": {
+      "type": "string"
+    },
+    "city": {
+      "type": "string"
+    },
+    "type": {
+      "type": "string",
+      "enum": [
+        "full_time",
+        "part_time",
+        "remote",
+        "contract",
+        "internship"
+      ],
+      "default": "full_time"
+    },
+    "salary_from": {
+      "type": "number"
+    },
+    "salary_to": {
+      "type": "number"
+    },
+    "description": {
+      "type": "string"
+    },
+    "requirements": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "category": {
+      "type": "string"
+    },
+    "veteran_friendly": {
+      "type": "boolean",
+      "default": true
+    },
+    "contact_email": {
+      "type": "string"
+    },
+    "contact_phone": {
+      "type": "string"
+    },
+    "is_active": {
+      "type": "boolean",
+      "default": true
+    }
+  },
+  "required": [
+    "title",
+    "company"
+  ]
+}

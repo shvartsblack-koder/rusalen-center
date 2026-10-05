@@ -21,10 +21,11 @@ const navItems = [
     { label: 'Международная деятельность', path: '/science/international' },
   ]},
   { label: 'Образование', path: '/education', children: [
-    { label: 'Фундаментальное образование', path: '/education/fundamental' },
-    { label: 'Профессиональная переподготовка', path: '/education/retraining' },
-    { label: 'Повышение квалификации', path: '/education/qualification' },
-    { label: 'Издательство', path: '/education/publishing' },
+    { label: 'ДПО РУСАЛЕН', path: '/education' },
+    { label: 'Программы', path: '/education/programs' },
+    { label: 'Как устроено обучение', path: '/education#how-we-teach' },
+    { label: 'Преподаватели', path: '/education/team' },
+    { label: 'Связи программ', path: '/education/visualization' },
   ]},
   { label: 'Проекты', path: null, children: [
     { label: 'PsyPedia', path: '/library' },

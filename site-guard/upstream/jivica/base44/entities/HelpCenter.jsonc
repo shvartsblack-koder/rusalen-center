@@ -1,0 +1,77 @@
+{
+  "name": "HelpCenter",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string"
+    },
+    "type": {
+      "type": "string",
+      "enum": [
+        "psychological",
+        "crisis",
+        "psychiatric",
+        "rehabilitation",
+        "veteran_org",
+        "legal",
+        "social"
+      ],
+      "default": "psychological"
+    },
+    "address": {
+      "type": "string"
+    },
+    "city": {
+      "type": "string"
+    },
+    "phone": {
+      "type": "string"
+    },
+    "email": {
+      "type": "string"
+    },
+    "website": {
+      "type": "string"
+    },
+    "working_hours": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    },
+    "services": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "rating": {
+      "type": "number"
+    },
+    "reviews_count": {
+      "type": "number",
+      "default": 0
+    },
+    "latitude": {
+      "type": "number"
+    },
+    "longitude": {
+      "type": "number"
+    },
+    "is_24h": {
+      "type": "boolean",
+      "default": false
+    },
+    "accepts_emergency": {
+      "type": "boolean",
+      "default": false
+    },
+    "image_url": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "name",
+    "type"
+  ]
+}

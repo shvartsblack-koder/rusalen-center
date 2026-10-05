@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { validateLeadFields } from '@/lib/formValidation';
 import { submitLead } from '@/lib/submitLead';
 import { motion } from 'framer-motion';
@@ -52,6 +53,7 @@ export default function PsyPay() {
   const [form, setForm] = useState({ name: '', email: '', phone: '', country: '', activity_type: '', expected_turnover: '', comment: '' });
   const [errors, setErrors] = useState({});
   const [status, setStatus] = useState('idle');
+  const [consent, setConsent] = useState(false);
 
   const updateField = (field, value) => {
     setForm((prev) => ({ ...prev, [field]: value }));
@@ -62,6 +64,7 @@ export default function PsyPay() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (!consent) return;
 
     const { valid, errors: validationErrors } = validateLeadFields({
       name: form.name,
@@ -88,10 +91,12 @@ export default function PsyPay() {
         email: form.email,
         phone: form.phone,
         source,
+        consent: true,
       });
       setStatus('success');
       setForm({ name: '', email: '', phone: '', country: '', activity_type: '', expected_turnover: '', comment: '' });
       setErrors({});
+      setConsent(false);
       setTimeout(() => setStatus('idle'), 5000);
     } catch (err) {
       console.error('PsyPay form error:', err);
@@ -213,8 +218,27 @@ export default function PsyPay() {
                 <Input placeholder="Ожидаемый оборот" value={form.expected_turnover} onChange={(e) => setForm({ ...form, expected_turnover: e.target.value })} className="bg-transparent border-b border-border/50 rounded-none focus:border-primary px-0" />
               </div>
               <Textarea placeholder="Комментарий" value={form.comment} onChange={(e) => setForm({ ...form, comment: e.target.value })} rows={3} className="bg-transparent border-b border-border/50 rounded-none focus:border-primary px-0 resize-none" />
+              <label className="flex items-start gap-2 text-xs leading-snug cursor-pointer text-muted-foreground">
+                <input
+                  type="checkbox"
+                  checked={consent}
+                  onChange={(e) => setConsent(e.target.checked)}
+                  className="mt-0.5 shrink-0"
+                />
+                <span>
+                  Я даю согласие на обработку персональных данных в соответствии с{' '}
+                  <Link to="/privacy" className="text-primary underline" onClick={(e) => e.stopPropagation()}>
+                    политикой конфиденциальности
+                  </Link>
+                </span>
+              </label>
+              {!consent && (
+                <p className="text-destructive text-xs">
+                  Необходимо согласие на обработку персональных данных
+                </p>
+              )}
               <div className="flex justify-end">
-                <Button type="submit" disabled={status === 'sending'} className="bg-primary text-primary-foreground hover:bg-primary/80 gap-2">
+                <Button type="submit" disabled={status === 'sending' || !consent} className="bg-primary text-primary-foreground hover:bg-primary/80 gap-2">
                   {status === 'sending' ? <><Loader2 className="w-4 h-4 animate-spin" /> Отправка...</> : <><Send className="w-4 h-4" /> Отправить заявку</>}
                 </Button>
               </div>
